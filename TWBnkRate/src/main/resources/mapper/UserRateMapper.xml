@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.TWBnkRate.mapper.UserRateMapper">
+    <select id="findAllUserRate" resultType="com.example.TWBnkRate.domain.UserRate">
+        SELECT * FROM userRate
+    </select>
+
+    <select id="findUserRateByDate" resultType="com.example.TWBnkRate.domain.UserRate">
+        SELECT * FROM userRate WHERE updateDate = #{xUpdateDate}
+    </select>
+
+    <select id="findUserRateByUserId" resultType="com.example.TWBnkRate.domain.UserRate">
+        SELECT * FROM userRate WHERE userId = #{xUserId}
+    </select>
+
+    <select id="findCountUserRateByUserId" resultType="int">
+        SELECT COUNT(*) FROM userRate WHERE userId = #{xUserId};
+    </select>
+
+    <select id="findNotifyTimesByUserId" resultType="int">
+        SELECT NotifyTimes FROM userRate WHERE userId = #{xUserId};
+    </select>
+
+    <insert  id="InsertUserRate">
+        INSERT INTO userRate (${xCurrency}, userId, updateDate, NotifyTimes)
+        VALUES
+        (#{xRate}, #{xUserId}, NOW(), 0);
+    </insert >
+
+    <update  id="UpdateUserRateByUserId">
+        UPDATE userRate set ${xCurrency} = #{xRate} where userId = #{xUserId};
+    </update >
+
+    <update  id="UpdateNotifyTimesByUserId">
+        UPDATE userRate set NotifyTimes = #{notifyTimes} where userId = #{xUserId};
+    </update >
+</mapper>

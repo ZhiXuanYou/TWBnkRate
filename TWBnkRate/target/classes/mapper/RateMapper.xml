@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.TWBnkRate.mapper.RateMapper">
+    <select id="findALLRate" resultType="com.example.TWBnkRate.domain.Rate">
+        SELECT * FROM rates
+    </select>
+
+    <select id="findRateByDate" resultType="com.example.TWBnkRate.domain.Rate">
+        SELECT * FROM rates WHERE date = #{xDate}
+    </select>
+
+    <select id="findRateByDateAndCurrency" resultType="com.example.TWBnkRate.domain.Rate">
+        SELECT * FROM rates WHERE date = #{xDate} and currency = #{xCurrency}
+    </select>
+
+    <insert id="insert" parameterType="com.example.TWBnkRate.domain.Rate">
+        INSERT INTO `rates` (`currency`, `buyCash`, `buyRate`, `saleCash`, `saleRate`, `date`)
+        VALUES (#{currency}, #{buyCash}, #{buyRate}, #{saleCash}, #{saleRate}, NOW())
+    </insert>
+</mapper>
